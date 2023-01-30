@@ -3,19 +3,16 @@ package clients
 import (
 	"context"
 	"fmt"
+	goredis "github.com/redis/go-redis/v9"
 	"strings"
 
 	"github.com/nitishm/go-rejson/v4/rjs"
 )
 
-type GoRedisCmd interface {
-	Result() (interface{}, error)
-}
-
 // GoRedisClientConn - an abstracted interface for goredis.Client, goredis.ClusterClient, goredis.Ring,
 // or goredis.UniversalClient
 type GoRedisClientConn interface {
-	Do(ctx context.Context, args ...interface{}) GoRedisCmd
+	Do(ctx context.Context, args ...interface{}) *goredis.Cmd
 }
 
 // GoRedis implements ReJSON interface for Go-Redis/Redis Redis client
